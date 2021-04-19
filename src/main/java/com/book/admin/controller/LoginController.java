@@ -20,13 +20,35 @@ public class LoginController {
     private LoginService loginService;
 
     @GetMapping("userLogin")
-    public ResultVO userLogin(HttpServletResponse response,User user) {
-        return loginService.userLogin(response,user);
+    public ResultVO userLogin(HttpServletResponse response,HttpServletRequest request,User user) {
+        User user1 = loginService.userLogin(user);
+        if (user1 != null) {
+            Cookie cookie = new Cookie("user-name",user1.getUserName());
+            cookie.setMaxAge(180000);
+            cookie.setPath("/");
+            cookie.setDomain("localhost");
+            response.addCookie(cookie);
+            return new ResultVO("登录成功");
+        }else
+        {
+            return new ResultVO("-1","登录失败");
+        }
+
     }
 
-    @GetMapping("test000")
-    public ResultVO test000(HttpServletRequest request) {
+    @GetMapping("getUser")
+    public ResultVO getUser(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
-        return new ResultVO(cookies);
+
+        if(cookies==null) {
+            return new ResultVO("-2","缺少cookie");
+        }else {
+            for(Cookie cookie:cookies) {
+                if(cookie.getName().equals("user-name")) {
+                    return new ResultVO();
+                }
+            }
+            return new ResultVO("-2","缺少cookie");
+        }
     }
 }

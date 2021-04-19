@@ -21,14 +21,18 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
      * 配置跨域请求
      */
     private static final String[] ALLOWED_ORIGINS = new String[] {
-            "http://localhost:63342"
+            "http://localhost:63342",
+            "http://localhost:3000",
+            "http://localhost:8080"
     };
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(ALLOWED_ORIGINS)
-                .allowCredentials(true).allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS").maxAge(3600);
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS").
+                maxAge(3600);
     }
 
     @Override
