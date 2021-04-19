@@ -45,7 +45,7 @@ public class LoginController {
         }else {
             for(Cookie cookie:cookies) {
                 if(cookie.getName().equals("user-name")) {
-                    return new ResultVO();
+                    return new ResultVO(cookie.getName());
                 }
             }
             return new ResultVO("-2","缺少cookie");

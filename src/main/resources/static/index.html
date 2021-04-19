@@ -31,99 +31,131 @@
       (function () {
         let amis = amisRequire('amis/embed');
 
-        const app = {
-          type: 'app',
-          brandName: 'Admin',
-          logo: 'public/logo.png',
-          header: {
-            type: 'tpl',
-            inline: false,
-            className: 'w-full',
-            tpl:
-              '<div class="flex justify-between"><div>顶部区域左侧</div><div>顶部区域右侧</div></div>'
-          },
-          // footer: '<div class="p-2 text-center bg-light">底部区域</div>',
-          // asideBefore: '<div class="p-2 text-center">菜单前面区域</div>',
-          // asideAfter: '<div class="p-2 text-center">菜单后面区域</div>',
-          api: '/pages/site.json'
-        };
+        let amisJSON =
+                {
+                  type:"page",
+                  body:[
+                    {
+                      "type": "grid",
+                      "columns": [
+                        {
+                          "type": "form",
+                          "title": "登录中文核心期刊审核系统 ",
+                          "mode": "horizontal",
+                          "autoFocus": false,
+                          "horizontal": {
+                            "left": "col-sm-5",
+                            "right": "col-sm-8",
+                            "offset": "col-sm-offset-3"
+                          },
+                          "controls": [
+                            {
+                              "type": "email",
+                              "name": "email",
+                              "placeholder": "请输入邮箱地址",
+                              "label": "邮箱",
+                              "required": true,
+                              "desc": "表单描述文字",
+                              size:"md"
+                            },
+                            {
+                              "type": "password",
+                              "name": "password",
+                              "label": "密码",
+                              "placeholder": "输入密码",
+                              size:"md"
+                            },
+                            {
+                              "type": "checkbox",
+                              "name": "rememberMe",
+                              "label": "记住登录"
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": "action",
+                              "label": "登录",
+                              actionType: "ajax",
+                              api:{
+                                url: "http://localhost:8080/login/userLogin",
+                                method:"get",
+                                data:{
+                                  "email":"${email}",
+                                  password:"${password}"
+                                }
+                              },
+                              "redirect":"./manger.html",
+                              level:"success"
+                            },
+                            {
+                              "type": "action",
+                              "actionType": "dialog",
+                              "label": "登录须知",
+                              level:"primary",
+                              "dialog": {
+                                "title": "登录须知",
+                                "body": "登录须知"
+                              }
+                            },
+                            {
+                              "type": "button",
+                              "label": "注册用户",
+                              actionType: "link",
+                              "url": "./register.html"
+                            }
+                          ]
 
-        function normalizeLink(to, location = window.location) {
-          to = to || '';
+                        }
 
-          if (to && to[0] === '#') {
-            to = location.pathname + location.search + to;
-          } else if (to && to[0] === '?') {
-            to = location.pathname + to;
-          }
+                      ]
+                    },
 
-          const idx = to.indexOf('?');
-          const idx2 = to.indexOf('#');
-          let pathname = ~idx
-            ? to.substring(0, idx)
-            : ~idx2
-            ? to.substring(0, idx2)
-            : to;
-          let search = ~idx ? to.substring(idx, ~idx2 ? idx2 : undefined) : '';
-          let hash = ~idx2 ? to.substring(idx2) : location.hash;
+                  ]
+                }
 
-          if (!pathname) {
-            pathname = location.pathname;
-          } else if (pathname[0] != '/' && !/^https?\:\/\//.test(pathname)) {
-            let relativeBase = location.pathname;
-            const paths = relativeBase.split('/');
-            paths.pop();
-            let m;
-            while ((m = /^\.\.?\//.exec(pathname))) {
-              if (m[0] === '../') {
-                paths.pop();
-              }
-              pathname = pathname.substring(m[0].length);
-            }
-            pathname = paths.concat(pathname).join('/');
-          }
 
-          return pathname + search + hash;
-        }
-        const match = amisRequire('path-to-regexp').match;
+
 
         let amisScoped = amis.embed(
-          '#root',
-          app,
-          {},
-          {
-            watchRouteChange: fn => {
-              window.addEventListener('hashchange', fn);
-              return () => {
-                window.removeEventListener('hashchange', fn);
-              };
-            },
-            jumpTo: to => {
-              location.hash = to;
-            },
-            isCurrentUrl: (to, ctx) => {
-              if (!to) {
-                return false;
-              }
-              const pathname = location.hash ? location.hash.substring(1) : '/';
-              const link = normalizeLink(to, {
-                ...location,
-                pathname,
-                hash: ''
-              });
+                '#root',
+                amisJSON,
+                {
+                  // 这里是初始 props，一般不用传。
+                  // locale: 'en-US' // props 中可以设置语言，默认是中文
+                },
+                {
+                  // // 可以不传，用来实现 ajax 请求
+                  // fetcher: (url, method, data, config) => {},
+                  //
+                  // // 可以不传，全局 api 适配器。
+                  // // 另外在 amis 配置项中的 api 也可以配置适配器，针对某个特定接口单独处理。
+                  // responseAdpater(api, response, query, request) {
+                  //   return response;
+                  // },
 
-              if (!~link.indexOf('http') && ~link.indexOf(':')) {
-                let strict = ctx && ctx.strict;
-                return match(link, {
-                  decode: decodeURIComponent,
-                  strict: typeof strict !== 'undefined' ? strict : true
-                })(pathname);
-              }
+                  // 可以不传，用来接管页面跳转，比如用 location.href 或 window.open，或者自己实现 amis 配置更新
+                  // jumpTo: to => { location.href = to; },
 
-              return pathname === link;
-            },
-            theme: 'default'
-          }
+                  // 可以不传，用来实现地址栏更新
+                  // updateLocation: (to, replace) => {},
+
+                  // 可以不传，用来判断是否目标地址当前地址。
+                  // isCurrentUrl: url => {},
+
+                  // 可以不传，用来实现复制到剪切板
+                  // copy: content => {},
+
+                  // 可以不传，用来实现通知
+                  // notify: (type, msg) => {},
+
+                  // 可以不传，用来实现提示
+                  // alert: content => {},
+
+                  // 可以不传，用来实现确认框。
+                  // confirm: content => {},
+
+                  // theme: 'cxd' // 主题，默认是 default，还可以设置成 cxd 或 dark，但记得引用它们的 css，比如 sdk 目录下的 cxd.css
+                }
         );
       })();
     </script>
