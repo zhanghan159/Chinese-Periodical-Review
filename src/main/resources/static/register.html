@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>amis admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link rel="stylesheet" title="default" href="https://cdn.jsdelivr.net/npm/amis@beta/sdk/sdk.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/amis@beta/sdk/helper.css" />
+    <script src="https://cdn.jsdelivr.net/npm/amis@beta/sdk/sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+      html,
+      body,
+      .app-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="app-wrapper"></div>
+    <script>
+      (function () {
+        let amis = amisRequire('amis/embed');
+
+        let amisJSON =
+                {}
+
+
+
+        let amisScoped = amis.embed(
+                '#root',
+                amisJSON,
+                {
+                  // 这里是初始 props，一般不用传。
+                  // locale: 'en-US' // props 中可以设置语言，默认是中文
+                },
+                {
+                  // // 可以不传，用来实现 ajax 请求
+                  // fetcher: (url, method, data, config) => {},
+                  //
+                  // // 可以不传，全局 api 适配器。
+                  // // 另外在 amis 配置项中的 api 也可以配置适配器，针对某个特定接口单独处理。
+                  // responseAdpater(api, response, query, request) {
+                  //   return response;
+                  // },
+
+                  // 可以不传，用来接管页面跳转，比如用 location.href 或 window.open，或者自己实现 amis 配置更新
+                  // jumpTo: to => { location.href = to; },
+
+                  // 可以不传，用来实现地址栏更新
+                  // updateLocation: (to, replace) => {},
+
+                  // 可以不传，用来判断是否目标地址当前地址。
+                  // isCurrentUrl: url => {},
+
+                  // 可以不传，用来实现复制到剪切板
+                  // copy: content => {},
+
+                  // 可以不传，用来实现通知
+                  // notify: (type, msg) => {},
+
+                  // 可以不传，用来实现提示
+                  // alert: content => {},
+
+                  // 可以不传，用来实现确认框。
+                  // confirm: content => {},
+
+                  // theme: 'cxd' // 主题，默认是 default，还可以设置成 cxd 或 dark，但记得引用它们的 css，比如 sdk 目录下的 cxd.css
+                }
+        );
+      })();
+    </script>
+  </body>
+</html>
