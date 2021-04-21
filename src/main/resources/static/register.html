@@ -37,8 +37,15 @@
                   "title":"用户注册界面",
                   "body":{
                     "type":"form",
+                    "title":"注册表单",
                     "mode": "horizontal",
                     "autoFocus": false,
+                    "api":{
+                      "method":"post",
+                      "url":"",
+                      "data":{
+                      }
+                    },
                     "horizontal": {
                       "left": "col-sm-5",
                       "right": "col-sm-8",
@@ -63,12 +70,73 @@
                         "type":"password",
                         "name":"confirmPassword",
                         "label":"确认密码",
-                        "placeholder": "请在此输入密码",
+                        "placeholder": "请再次输入密码",
                         "validations": {
                           "equals":"${password}"
                         },
                         "size":"md"
+                      },
+                      {
+                        "type":"text",
+                        "name":"userName",
+                        "label":"用户姓名",
+                        "placeholder": "请填入真实姓名",
+                        "size":"md"
+                      },
+                      {
+                        "type":"select",
+                        "name":"sex",
+                        "label":"性别",
+                        "placeholder": "请选择性别",
+                        "labelField": "label",
+                        "valueField": "value",
+                        "placeholder": "请选择",
+                        "size":"md",
+                        "options":[
+                          {
+                            "label":"男",
+                            "value":0
+                          },
+                          {
+                            "label":"女",
+                            "value":1
+                          }
+                        ]
+                      },
+                      {
+                        "type":"text",
+                        "name":"jobNumber",
+                        "label":"用户工号",
+                        "placeholder": "请输入用户工号",
+                        "size":"md"
+                      },
+                      {
+                        "type":"text",
+                        "name":"telephoneNumber",
+                        "label":"电话号码",
+                        "placeholder": "请输入电话号码",
+                        "size":"md"
+                      },
+                      {
+                        "type":"text",
+                        "name":"telephoneNumber",
+                        "label":"介绍",
+                        "placeholder": "请输入个人介绍",
+                        "size":"md"
                       }
+                    ],
+                    "actions":[
+                      {
+                        "type": "button",
+                        "label": "返回登录界面",
+                        "actionType": "link",
+                        "url": "./index.html"
+                      },
+                      {
+                        "type": "submit",
+                        "label": "注册"
+                      }
+
                     ]
                   }
                 }
