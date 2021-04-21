@@ -32,7 +32,46 @@
         let amis = amisRequire('amis/embed');
 
         let amisJSON =
-                {}
+                {
+                  "type":"page",
+                  "title":"用户注册界面",
+                  "body":{
+                    "type":"form",
+                    "mode": "horizontal",
+                    "autoFocus": false,
+                    "horizontal": {
+                      "left": "col-sm-5",
+                      "right": "col-sm-8",
+                      "offset": "col-sm-offset-3"
+                    },
+                    "controls":[
+                      {
+                        "type":"email",
+                        "name":"email",
+                        "placeholder": "请输入邮箱地址",
+                        "label":"邮箱地址",
+                        "size":"md"
+                      },
+                      {
+                        "type":"password",
+                        "name":"password",
+                        "label":"密码",
+                        "placeholder": "请输入密码",
+                        "size":"md"
+                      },
+                      {
+                        "type":"password",
+                        "name":"confirmPassword",
+                        "label":"确认密码",
+                        "placeholder": "请在此输入密码",
+                        "validations": {
+                          "equals":"${password}"
+                        },
+                        "size":"md"
+                      }
+                    ]
+                  }
+                }
 
 
 
