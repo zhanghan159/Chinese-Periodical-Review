@@ -23,7 +23,7 @@ public class User {
      * '用户身份'
      * 用户身份 0 - 申请用户  1 - 审核员   2 - 管理员  3 - 系统管理员
      */
-    private String userIdentity;
+    private int userIdentity;
 
     /**
      * 分组id

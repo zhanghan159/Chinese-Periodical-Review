@@ -2,11 +2,10 @@ package com.book.admin.controller;
 
 import com.book.admin.model.User;
 import com.book.admin.service.LoginService;
+import com.book.admin.utils.Loginutil;
 import com.book.admin.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +19,10 @@ public class LoginController {
     private LoginService loginService;
 
     @GetMapping("userLogin")
-    public ResultVO userLogin(HttpServletResponse response,HttpServletRequest request,User user) {
+    public ResultVO userLogin(HttpServletResponse response,User user) {
         User user1 = loginService.userLogin(user);
         if (user1 != null) {
-            Cookie cookie = new Cookie("user-name",user1.getUserName());
+            Cookie cookie = new Cookie("email",user1.getUserName());
             cookie.setMaxAge(180000);
             cookie.setPath("/");
             cookie.setDomain("localhost");
@@ -36,19 +35,10 @@ public class LoginController {
 
     }
 
-    @GetMapping("getUser")
-    public ResultVO getUser(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-
-        if(cookies==null) {
-            return new ResultVO("-2","缺少cookie");
-        }else {
-            for(Cookie cookie:cookies) {
-                if(cookie.getName().equals("user-name")) {
-                    return new ResultVO(cookie.getName());
-                }
-            }
-            return new ResultVO("-2","缺少cookie");
-        }
+    @PostMapping("addUser")
+    public ResultVO addUser(@RequestBody User user) {
+        loginService.addUser(user);
+        return new ResultVO("添加成功返回界面");
     }
+
 }

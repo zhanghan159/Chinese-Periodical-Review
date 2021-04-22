@@ -16,8 +16,12 @@ public class LoginService {
     private UserMapping userMapping;
 
     public User userLogin(User user) {
-        User user1 = userMapping.getUserByEmailAndPassword(user);
+        return userMapping.getUserByEmailAndPassword(user);
+    }
 
-        return user1;
+    public ResultVO addUser(User user) {
+        long insert = userMapping.insert(user);
+        if (insert == 0) return new ResultVO("-3","增加失败");
+        return new ResultVO();
     }
 }
