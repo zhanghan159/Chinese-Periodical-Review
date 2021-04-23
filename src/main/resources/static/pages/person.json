@@ -8,38 +8,64 @@
   "body": {
     "type":"form",
     "title":"个性信息展示",
-
     "controls": [
+      {
+        "type":"text",
+        "name":"userId",
+        "placeholder": "请输入邮箱地址",
+        "label":"用户id",
+        "size":"md",
+        "disabled": true
+      },
       {
         "type":"email",
         "name":"email",
         "placeholder": "请输入邮箱地址",
         "label":"邮箱地址",
-        "size":"md"
+        "size":"md",
+        "disabled": true
       },
       {
-        "type":"password",
-        "name":"password",
-        "label":"密码",
-        "placeholder": "请输入密码",
-        "size":"md"
-      },
-      {
-        "type":"password",
-        "name":"confirmPassword",
-        "label":"确认密码",
-        "placeholder": "请再次输入密码",
-        "validations": {
-          "equals":"${password}"
-        },
-        "size":"md"
+        "type":"select",
+        "name":"userIdentity",
+        "label":"用户身份",
+        "labelField": "label",
+        "valueField": "value",
+        "size":"md",
+        "disabled": true,
+        "options":[
+          {
+            "label":"申请用户",
+            "value":0
+          },
+          {
+            "label":"审核员",
+            "value":1
+          },
+          {
+            "label":"管理员",
+            "value":2
+          },
+          {
+            "label":"系统管理员",
+            "value":3
+          }
+        ]
       },
       {
         "type":"text",
         "name":"userName",
         "label":"用户姓名",
         "placeholder": "请填入真实姓名",
-        "size":"md"
+        "size":"md",
+        "disabled": true
+      },
+      {
+        "type":"text",
+        "name":"groupId",
+        "label":"分组id",
+        "size":"md",
+        "disabled": true
       },
       {
         "type":"select",
@@ -49,6 +75,7 @@
         "labelField": "label",
         "valueField": "value",
         "size":"md",
+        "disabled": true,
         "options":[
           {
             "label":"男",
@@ -65,25 +92,25 @@
         "name":"jobNumber",
         "label":"用户工号",
         "placeholder": "请输入用户工号",
-        "size":"md"
+        "size":"md",
+        "disabled": true
       },
       {
         "type":"text",
         "name":"telephoneNumber",
         "label":"电话号码",
         "placeholder": "请输入电话号码",
-        "size":"md"
+        "size":"md",
+        "disabled": true
       },
       {
         "type":"text",
         "name":"introduce",
         "label":"介绍",
         "placeholder": "请输入个人介绍",
-        "size":"md"
+        "size":"md",
+        "disabled": true
       }
     ]
   }
-
-
-
 }
