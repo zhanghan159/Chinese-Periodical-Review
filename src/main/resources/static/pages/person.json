@@ -1,5 +1,89 @@
 {
   "type": "page",
   "title": "个人界面",
-  "initApi": "http://localhost:8080/login/getUser"
+  "initApi": {
+    "url":"http://localhost:8080/user/getUser.do",
+    "method": "get"
+  },
+  "body": {
+    "type":"form",
+    "title":"个性信息展示",
+
+    "controls": [
+      {
+        "type":"email",
+        "name":"email",
+        "placeholder": "请输入邮箱地址",
+        "label":"邮箱地址",
+        "size":"md"
+      },
+      {
+        "type":"password",
+        "name":"password",
+        "label":"密码",
+        "placeholder": "请输入密码",
+        "size":"md"
+      },
+      {
+        "type":"password",
+        "name":"confirmPassword",
+        "label":"确认密码",
+        "placeholder": "请再次输入密码",
+        "validations": {
+          "equals":"${password}"
+        },
+        "size":"md"
+      },
+      {
+        "type":"text",
+        "name":"userName",
+        "label":"用户姓名",
+        "placeholder": "请填入真实姓名",
+        "size":"md"
+      },
+      {
+        "type":"select",
+        "name":"sex",
+        "label":"性别",
+        "placeholder": "请选择性别",
+        "labelField": "label",
+        "valueField": "value",
+        "size":"md",
+        "options":[
+          {
+            "label":"男",
+            "value":0
+          },
+          {
+            "label":"女",
+            "value":1
+          }
+        ]
+      },
+      {
+        "type":"text",
+        "name":"jobNumber",
+        "label":"用户工号",
+        "placeholder": "请输入用户工号",
+        "size":"md"
+      },
+      {
+        "type":"text",
+        "name":"telephoneNumber",
+        "label":"电话号码",
+        "placeholder": "请输入电话号码",
+        "size":"md"
+      },
+      {
+        "type":"text",
+        "name":"introduce",
+        "label":"介绍",
+        "placeholder": "请输入个人介绍",
+        "size":"md"
+      }
+    ]
+  }
+
+
+
 }

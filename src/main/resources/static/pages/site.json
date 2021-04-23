@@ -9,8 +9,15 @@
         "redirect": "/index/1"
       },
       {
-        "label": "示例",
+        "label": "分组管理中心",
         "children": [
+          {
+            "label": "个人信息",
+            "url": "/person",
+            "icon": "fa fa-user",
+            "schemaApi": "get:pages/person.json"
+
+          },
           {
             "label": "页面A",
             "url": "index",
@@ -49,13 +56,7 @@
               }
             ]
           },
-          {
-            "label": "页面B",
-            "url": "/person",
-            "icon": "fa fa-list",
-            "schemaApi": "get:pages/person.json"
 
-          },
           {
             "label": "期刊审核界面",
             "schema": {

@@ -22,14 +22,17 @@ public class LoginController {
     public ResultVO userLogin(HttpServletResponse response,User user) {
         User user1 = loginService.userLogin(user);
         if (user1 != null) {
-            Cookie cookie = new Cookie("email",user1.getUserName());
+            Cookie cookie = new Cookie("email",user1.getEmail());
             cookie.setMaxAge(180000);
             cookie.setPath("/");
             cookie.setDomain("localhost");
             response.addCookie(cookie);
             return new ResultVO("登录成功");
-        }else
-        {
+        }else if (user1 == null) {
+            return new ResultVO("-1","登录失败");
+        }if (user1.getUserIdentity() == 0) {
+            return new ResultVO("-1","请等待管理员审核注册申请");
+        }else {
             return new ResultVO("-1","登录失败");
         }
 

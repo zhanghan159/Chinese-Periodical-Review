@@ -13,10 +13,13 @@ public interface UserMapping {
     @Select("select * from user where email = #{email} and password = #{password}")
     User getUserByEmailAndPassword(User user);
 
-    @Select("select userIdentity from user where email")
-    int getUserByEmail(String name);
+    @Select("select userIdentity from user where email = #{name}")
+    int getUserIdentityByEmail(String name);
 
     @Insert("insert into user (email, password, userName, sex, jobNumber, telephoneNumber, introduce) " +
             "value (#{email},#{password},#{userName},#{sex},#{jobNumber},#{telephoneNumber},#{introduce})")
     long insert(User user);
+
+    @Select("select * from user where email = #{email}")
+    User getUserByEmail(String email);
 }
