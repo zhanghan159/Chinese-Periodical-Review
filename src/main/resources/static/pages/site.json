@@ -9,7 +9,7 @@
         "redirect": "/person"
       },
       {
-        "label": "分组管理中心",
+        "label": "审核中心",
         "children": [
           {
             "label": "个人信息",
@@ -48,15 +48,6 @@
               }
             ]
           },
-
-          {
-            "label": "期刊审核界面",
-            "schema": {
-              "type": "page",
-              "title": "页面C",
-              "body": "页面C"
-            }
-          },
           {
             "label": "列表示例",
             "url": "/crud",
@@ -90,15 +81,37 @@
         ]
       },
       {
-        "label": "分组2",
+        "label": "管理中心",
         "children": [
           {
-            "label": "用户管理",
-            "schema": {
-              "type": "page",
-              "title": "用户管理",
-              "body": "页面C"
-            }
+            "label": "分组管理界面",
+            "url": "/groupManger",
+            "rewrite": "/groupManger/userManger",
+            "children": [
+              {
+                "label": "用户管理",
+                "url": "/groupManger/userManger",
+                "schemaApi": "get:pages/userManger.json"
+              },
+              {
+                "label": "页面A-2",
+                "url": "2",
+                "schema": {
+                  "type": "page",
+                  "title": "页面A-2",
+                  "body": "页面A-2"
+                }
+              },
+              {
+                "label": "页面A-3",
+                "url": "3",
+                "schema": {
+                  "type": "page",
+                  "title": "页面A-3",
+                  "body": "页面A-3"
+                }
+              }
+            ]
           },
           {
             "label": "外部链接",
