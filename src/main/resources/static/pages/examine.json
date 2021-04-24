@@ -1,6 +1,5 @@
 {
   "type": "page",
-  "title": "待审核列表",
   "body": {
     "type": "crud",
     "mode": "table",
@@ -85,9 +84,11 @@
         "label": "审核员姓名"
       },
       {
-        "type": "text",
+        "type": "date",
         "name": "operateTime",
-        "label": "审核时间"
+        "label": "审核时间",
+        "valueFormat": "x",
+        "format": "YYYY-MM-DD HH:mm:ss"
       },
       {
         "type": "operation",
@@ -99,33 +100,182 @@
             "size": "md",
             "type": "button",
             "actionType": "dialog",
-            "drawer":{
-              "$ref":"updatevalue"
+            "dialog":{
+              "title":"查看期刊信息",
+              "size": "lg",
+              "actions": [],
+              "body":{
+                "type":"form",
+                "mode": "horizontal",
+                "actions": [],
+                "controls": [
+                  {
+                    "type": "static",
+                    "name": "periodicalId",
+                    "label": "期刊id"
+                  },
+                  {
+                    "type": "static",
+                    "name": "periodicalName",
+                    "label": "期刊名字"
+                  },
+                  {
+                    "type": "static",
+                    "name": "groupId",
+                    "label": "分配分组Id"
+                  },
+                  {
+                    "type": "static",
+                    "name": "periodicalType",
+                    "label": "期刊类别"
+                  },
+                  {
+                    "type": "static",
+                    "name": "periodicalStatus",
+                    "label": "期刊状态"
+                  },
+                  {
+                    "type": "static",
+                    "name": "fm",
+                    "label": "期刊格式内容是否达标"
+                  },
+                  {
+                    "type": "static",
+                    "name": "ct",
+                    "label": "期刊内容是否符合主题"
+                  },
+                  {
+                    "type": "static",
+                    "name": "ct",
+                    "label": "期刊内容是否符合主题"
+                  },
+                  {
+                    "type": "static",
+                    "name": "ol",
+                    "label": "期刊内容是否原创"
+                  },
+                  {
+                    "type": "static",
+                    "name": "score",
+                    "label": "期刊评分"
+                  },
+                  {
+                    "type": "static",
+                    "name": "evaluate",
+                    "label": "评价"
+                  },
+                  {
+                    "type": "static-date",
+                    "name": "censorshipTime",
+                    "label": "送审时间",
+                    "valueFormat": "x",
+                    "format": "YYYY-MM-DD HH:mm:ss"
+                  },
+                  {
+                    "type": "static",
+                    "name": "userName",
+                    "label": "审核员姓名"
+                  },
+                  {
+                    "type": "static-date",
+                    "name": "operateTime",
+                    "label": "审核时间",
+                    "valueFormat": "x",
+                    "format": "YYYY-MM-DD HH:mm:ss"
+                  }
+                ]
+
+              }
+
             }
           },
           {
-            "tooltip": "修改",
+            "tooltip": "审核",
             "icon": "fa fa-pencil text-warning",
             "size": "md",
             "type": "button",
             "actionType": "drawer",
             "drawer":{
-              "$ref":"updatevalue"
+              "title":"审核期刊",
+              "body":{
+                "type":"form",
+                "api":{
+                  "method":"post",
+                  "url":"http://localhost:8080/periodical/examinePeriodical.do",
+                  "data":{
+                    "&": "$$"
+                  }
+                },
+                "controls": [
+                  {
+                    "type": "text",
+                    "name": "periodicalId",
+                    "label": "期刊id"
+                  },
+                  {
+                    "type": "text",
+                    "name": "periodicalName",
+                    "label": "期刊名字"
+                  },
+                  {
+                    "type": "text",
+                    "name": "groupId",
+                    "label": "分配分组Id"
+                  },
+                  {
+                    "type": "text",
+                    "name": "periodicalType",
+                    "label": "期刊类别"
+                  },
+                  {
+                    "type": "text",
+                    "name": "periodicalStatus",
+                    "label": "期刊状态"
+                  },
+                  {
+                    "type": "text",
+                    "name": "fm",
+                    "label": "期刊格式内容是否达标"
+                  },
+                  {
+                    "type": "text",
+                    "name": "ct",
+                    "label": "期刊内容是否符合主题"
+                  },
+                  {
+                    "type": "text",
+                    "name": "ct",
+                    "label": "期刊内容是否符合主题"
+                  },
+                  {
+                    "type": "text",
+                    "name": "ol",
+                    "label": "期刊内容是否原创"
+                  },
+                  {
+                    "type": "text",
+                    "name": "score",
+                    "label": "期刊评分"
+                  },
+                  {
+                    "type": "text",
+                    "name": "evaluate",
+                    "label": "评价"
+                  }
+                ]
             }
+          }
           },
           {
-            "tooltip": "删除",
-            "icon": "fa fa-trash text-danger",
+            "tooltip": "下载",
+            "icon": "fa fa-download",
             "size": "md",
             "type": "button",
-            "confirmText": "确认要删除？",
+            "confirmText": "确认下载？",
             "actionType":"ajax",
             "api": {
-              "url": "http://localhost:8081/adparamvalue/deletevalue",
+              "url": "",
               "method": "get",
-              "headers": {
-                "operator_uid": "233333"
-              },
               "data":{
                 "id":"${id|toInt}"
               }

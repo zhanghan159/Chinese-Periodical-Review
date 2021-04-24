@@ -40,5 +40,6 @@ CREATE TABLE `periodical` (
   `userId` int(11) DEFAULT NULL COMMENT '审核员id',
   `userName` varchar(50) DEFAULT NULL COMMENT '审核员姓名',
   `operateTime` datetime DEFAULT NULL COMMENT '操作时间',
+  `urlName` varchar(200) DEFAULT NULL COMMENT '期刊下载名字',
   PRIMARY KEY (`periodicalId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='期刊审核表'

@@ -1,5 +1,6 @@
 package com.book.admin.controller;
 
+import com.book.admin.model.Periodical;
 import com.book.admin.model.User;
 import com.book.admin.query.Queryparam;
 import com.book.admin.service.CommontService;
@@ -26,6 +27,15 @@ public class PeriodicalController {
         User user = commontService.getUserByEmail(email);
         if (user.getUserIdentity()!=0)
             return periodicalService.queryByPage(queryparam , user);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
+    @PostMapping("examinePeriodical.do")
+    public ResultVO examinePeriodical (HttpServletRequest request,@RequestBody Periodical periodical) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0)
+            return periodicalService.examinePeriodical(periodical , user);
         return new ResultVO("-4","没有权限访问该功能");
     }
 }

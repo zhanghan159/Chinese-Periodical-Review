@@ -78,12 +78,12 @@
               {
                 "label": "查看",
                 "url": "/crud/:id",
-                "schemaApi": "get:/pages/crud-view.json"
+                "schemaApi": "get:pages/crud-view.json"
               },
               {
                 "label": "修改",
                 "url": "/crud/:id/edit",
-                "schemaApi": "get:/pages/crud-edit.json"
+                "schemaApi": "get:pages/crud-edit.json"
               }
             ]
           }
