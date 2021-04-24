@@ -1,0 +1,138 @@
+{
+  "type": "page",
+  "title": "待审核列表",
+  "body": {
+    "type": "crud",
+    "mode": "table",
+    "api": {
+      "method": "post",
+      "url": "http://localhost:8080/periodical/queryAll.do",
+      "data":{
+        "page":"${page}",
+        "pageSize":"${perPage|toInt}",
+        "filterParams":[
+          {
+            "name": "periodicalId",
+            "relation": "=",
+            "value": "${periodicalId|toInt}"
+          }
+        ]
+      }
+    },
+    "filter": {
+      "title": "查找",
+      "controls": [
+        {
+          "type": "text",
+          "label":"期刊id",
+          "name":"periodicalId"
+        },
+        {
+          "type": "submit",
+          "label": "搜索",
+          "level": "primary"
+        },
+        {
+          "type": "reset",
+          "label": "重置",
+          "level": "info"
+        }
+      ]
+    },
+    "footerToolbar": [
+      "switch-per-page",
+      {
+        "type": "tpl",
+        "tpl": "共有${total}条数据",
+        "align": "right"
+      },
+      "pagination"
+    ],
+    "columns":[
+      {
+        "type": "text",
+        "name": "periodicalId",
+        "label": "期刊id"
+      },
+      {
+        "type": "text",
+        "name": "periodicalName",
+        "label": "期刊名字"
+      },
+      {
+        "type": "text",
+        "name": "groupId",
+        "label": "分配分组Id"
+      },
+      {
+        "type": "text",
+        "name": "periodicalType",
+        "label": "期刊类别"
+      },
+      {
+        "type": "text",
+        "name": "periodicalStatus",
+        "label": "期刊状态"
+      },
+      {
+        "type": "text",
+        "name": "score",
+        "label": "期刊评分"
+      },
+      {
+        "type": "text",
+        "name": "userName",
+        "label": "审核员姓名"
+      },
+      {
+        "type": "text",
+        "name": "operateTime",
+        "label": "审核时间"
+      },
+      {
+        "type": "operation",
+        "label": "操作",
+        "buttons":[
+          {
+            "tooltip": "查看",
+            "icon": "fa fa-eye",
+            "size": "md",
+            "type": "button",
+            "actionType": "dialog",
+            "drawer":{
+              "$ref":"updatevalue"
+            }
+          },
+          {
+            "tooltip": "修改",
+            "icon": "fa fa-pencil text-warning",
+            "size": "md",
+            "type": "button",
+            "actionType": "drawer",
+            "drawer":{
+              "$ref":"updatevalue"
+            }
+          },
+          {
+            "tooltip": "删除",
+            "icon": "fa fa-trash text-danger",
+            "size": "md",
+            "type": "button",
+            "confirmText": "确认要删除？",
+            "actionType":"ajax",
+            "api": {
+              "url": "http://localhost:8081/adparamvalue/deletevalue",
+              "method": "get",
+              "headers": {
+                "operator_uid": "233333"
+              },
+              "data":{
+                "id":"${id|toInt}"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

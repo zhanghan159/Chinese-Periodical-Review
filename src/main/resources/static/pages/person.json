@@ -8,6 +8,7 @@
   "body": {
     "type":"form",
     "title":"个性信息展示",
+    "actions": [],
     "controls": [
       {
         "type":"text",

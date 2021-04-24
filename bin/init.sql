@@ -23,4 +23,22 @@ CREATE TABLE IF NOT EXISTS userGroup(
     groupLeaderName VARCHAR(200) COMMENT '组长姓名',
     groupPeopleNumber int COMMENT '分组人数'
     introduce varchar(200) COMMENT '介绍'
-    ) COMMENT '用户表';
+    ) COMMENT '分组表';
+
+CREATE TABLE `periodical` (
+  `periodicalId` int(11) NOT NULL AUTO_INCREMENT COMMENT '期刊id',
+  `periodicalName` varchar(200) DEFAULT NULL COMMENT '期刊名字',
+  `groupId` int(11) DEFAULT NULL COMMENT '分配分组Id',
+  `periodicalType` int(11) DEFAULT NULL COMMENT '期刊类别',
+  `periodicalStatus` int(11) DEFAULT NULL COMMENT '期刊状态',
+  `fm` int(11) DEFAULT NULL COMMENT '期刊格式内容是否达标',
+  `ct` int(11) DEFAULT NULL COMMENT '期刊内容是否符合主题',
+  `ol` int(11) DEFAULT NULL COMMENT '期刊内容是否原创',
+  `score` int(11) DEFAULT NULL COMMENT '期刊评分',
+  `evaluate` varchar(200) DEFAULT NULL COMMENT '评价',
+  `censorshipTime` datetime DEFAULT NULL COMMENT '送审时间',
+  `userId` int(11) DEFAULT NULL COMMENT '审核员id',
+  `userName` varchar(50) DEFAULT NULL COMMENT '审核员姓名',
+  `operateTime` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`periodicalId`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='期刊审核表'

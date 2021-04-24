@@ -6,35 +6,27 @@
       {
         "label": "Home",
         "url": "/",
-        "redirect": "/index/1"
+        "redirect": "/person"
       },
       {
         "label": "分组管理中心",
         "children": [
           {
             "label": "个人信息",
-            "url": "/person",
+            "url": "person",
             "icon": "fa fa-user",
             "schemaApi": "get:pages/person.json"
 
           },
           {
-            "label": "页面A",
-            "url": "index",
-            "schema": {
-              "type": "page",
-              "title": "页面A",
-              "body": "页面A"
-            },
+            "label": "审核管理界面",
+            "url": "/examineManger",
+            "rewrite": "/examineManger/examine",
             "children": [
               {
-                "label": "页面A-1",
-                "url": "1",
-                "schema": {
-                  "type": "page",
-                  "title": "页面A-1",
-                  "body": "页面A-1"
-                }
+                "label": "待审核列表",
+                "url": "/examineManger/examine",
+                "schemaApi": "get:pages/examine.json"
               },
               {
                 "label": "页面A-2",
