@@ -1,14 +1,13 @@
 package com.book.admin.controller;
 
 import com.book.admin.model.User;
+import com.book.admin.query.Queryparam;
 import com.book.admin.service.CommontService;
 import com.book.admin.service.UserService;
 import com.book.admin.utils.Loginutil;
 import com.book.admin.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,5 +33,15 @@ public class UserController {
         User user = commontService.getUserByEmail(email);
         return new ResultVO(user);
     }
+
+    @PostMapping("queryAllToPass.do")
+    public ResultVO queryAllToPass (HttpServletRequest request,@RequestBody Queryparam queryparam) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+            return userService.queryAllToPass(queryparam , user);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
 
 }

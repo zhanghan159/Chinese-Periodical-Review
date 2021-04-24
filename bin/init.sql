@@ -19,11 +19,11 @@ CREATE TABLE IF NOT EXISTS user(
 CREATE TABLE IF NOT EXISTS userGroup(
     groupId INT PRIMARY KEY AUTO_INCREMENT COMMENT '分组id',
     groupName VARCHAR(200) COMMENT '分组名字',
-    groupLeaderId int COMMENT '组长id',
+    groupLeaderId INT COMMENT '组长id',
     groupLeaderName VARCHAR(200) COMMENT '组长姓名',
-    groupPeopleNumber int COMMENT '分组人数'
-    introduce varchar(200) COMMENT '介绍'
-    ) COMMENT '分组表';
+    groupPeopleNumber INT COMMENT '分组人数',
+    introduce VARCHAR(200) COMMENT '介绍'
+    ) COMMENT '分组表'
 
 CREATE TABLE `periodical` (
   `periodicalId` int(11) NOT NULL AUTO_INCREMENT COMMENT '期刊id',

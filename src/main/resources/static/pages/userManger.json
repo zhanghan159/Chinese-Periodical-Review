@@ -1,4 +1,139 @@
 {
   "type": "page",
-  "title": "用户列表"
+  "title": "用户列表",
+  "body":{
+    "type": "crud",
+    "mode": "table",
+    "api": {
+      "method": "post",
+      "url": "http://localhost:8080/user/queryAllToPass.do",
+      "data": {
+        "page":"${page}",
+        "pageSize":"${perPage|toInt}",
+        "filterParams":[
+          {
+            "name": "userName",
+            "relation": "like",
+            "value": "${userName}"
+          }
+        ]
+      }
+    },
+    "filter": {
+      "title": "查找",
+      "controls": [
+        {
+          "type": "text",
+          "label":"用户姓名",
+          "name":"userName"
+        },
+        {
+          "type": "submit",
+          "label": "搜索",
+          "level": "primary"
+        },
+        {
+          "type": "reset",
+          "label": "重置",
+          "level": "info"
+        }
+      ]
+    },
+    "footerToolbar": [
+      "switch-per-page",
+      {
+        "type": "tpl",
+        "tpl": "共有${total}条数据",
+        "align": "right"
+      },
+      "pagination"
+    ],
+    "columns":[
+      {
+        "type": "text",
+        "name": "userId",
+        "label": "用户id"
+      },
+      {
+        "type": "text",
+        "name": "email",
+        "label": "用户邮箱"
+      },
+      {
+        "type": "text",
+        "name": "userIdentity",
+        "label": "用户身份"
+      },
+      {
+        "type": "text",
+        "name": "groupId",
+        "label": "分组id"
+      },
+      {
+        "type": "text",
+        "name": "userName",
+        "label": "用户姓名"
+      },
+      {
+        "type": "text",
+        "name": "sex",
+        "label": "性别"
+      },
+      {
+        "type": "text",
+        "name": "jobNumber",
+        "label": "用户工号"
+      },
+      {
+        "type": "text",
+        "name": "telephoneNumber",
+        "label": "电话号码"
+      },
+      {
+        "type": "text",
+        "name": "introduce",
+        "label": "介绍"
+      },
+      {
+        "type": "operation",
+        "label": "操作",
+        "buttons":[
+          {
+            "tooltip": "加入分组",
+            "icon": "fa fa-users",
+            "size": "md",
+            "type": "button",
+            "actionType": "dialog",
+            "dialog":{
+              "title": "加入分组",
+              "body": {
+                "type": "form",
+
+                "title": "分组选项",
+                "api": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm?waitSeconds=2",
+                "actions": [
+                  {
+                    "type": "submit",
+                    "label": "提交",
+                    "primary": true
+                  }
+                ],
+                "controls": {
+                  "type": "select",
+                  "name": "groupId",
+                  "label": "加入分组",
+                  "valueField": "groupId",
+                  "labelField": "groupName",
+                  "source": {
+                    "method": "get",
+                    "url": "http://localhost:8080/userGroup/getAll.do"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
 }

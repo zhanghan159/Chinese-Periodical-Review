@@ -1,11 +1,18 @@
 package com.book.admin.mapping;
 
+import com.book.admin.mapping.dao.PeriodicalDaoProvider;
+import com.book.admin.mapping.dao.UserDaoProvider;
+import com.book.admin.model.Periodical;
 import com.book.admin.model.User;
+import com.book.admin.query.Queryparam;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Mapper
 @Component
@@ -22,4 +29,10 @@ public interface UserMapping {
 
     @Select("select * from user where email = #{email}")
     User getUserByEmail(String email);
+
+    @SelectProvider(type = UserDaoProvider.class, method = "queryByPage")
+    List<User> queryByPage(Queryparam queryparam);
+
+    @SelectProvider(type = UserDaoProvider.class, method = "getCount")
+    int getCount(Queryparam queryparam);
 }
