@@ -8,6 +8,7 @@ import com.book.admin.query.Queryparam;
 import com.book.admin.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,5 +29,11 @@ public class UserService {
         int count = userMapping.getCount(queryparam);
         PagerHelper<User> userPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
         return new ResultVO(userPagerHelper);
+    }
+
+    @Transactional
+    public ResultVO goingGroup(int userId, int groupId) {
+        Long i = userMapping.updateGroupId (userId,groupId);
+        return new ResultVO();
     }
 }

@@ -273,10 +273,10 @@
             "confirmText": "确认下载？",
             "actionType":"ajax",
             "api": {
-              "url": "",
+              "url": "http://localhost:8080/periodical/downloadPeriodical.do",
               "method": "get",
               "data":{
-                "id":"${id|toInt}"
+                "urlName":"${urlName}"
               }
             }
           }

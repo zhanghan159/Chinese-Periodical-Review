@@ -43,5 +43,14 @@ public class UserController {
         return new ResultVO("-4","没有权限访问该功能");
     }
 
+    @PostMapping("goingGroup.do")
+    public ResultVO goingGroup (HttpServletRequest request,int userId,int groupId) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+            return userService.goingGroup(userId , groupId);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
 
 }

@@ -108,9 +108,15 @@
               "title": "加入分组",
               "body": {
                 "type": "form",
-
                 "title": "分组选项",
-                "api": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm?waitSeconds=2",
+                "api":{
+                  "url": "123456",
+                  "method": "post",
+                  "data": {
+                    "userId": "${userId}",
+                    "groupId": "${groupId}"
+                  }
+                },
                 "actions": [
                   {
                     "type": "submit",

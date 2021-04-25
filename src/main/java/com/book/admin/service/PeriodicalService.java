@@ -9,6 +9,8 @@ import com.book.admin.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -32,5 +34,43 @@ public class PeriodicalService {
         long i = periodicalMapper.updata(periodical);
         if (i != 0 )return new ResultVO();
         return new ResultVO("-5","修改失败");
+    }
+
+    public ResultVO downloadPeriodical(HttpServletResponse response,String urlName) {
+//        try {
+//            BufferedInputStream fis = new BufferedInputStream(new FileInputStream("file/"+urlName));
+//            OutputStream out = new BufferedOutputStream(response.getOutputStream());
+//            byte[] buffer = new byte[fis.available()];
+//            fis.read(buffer);
+//            out.write(buffer);
+//            out.flush();
+//        } catch (Exception e) {
+//            return new ResultVO("-10","文件不存在");
+//        }
+//        return new ResultVO();
+
+        File file = new File("file/" + urlName);
+        if(!file.exists()){
+            return new ResultVO("-1","下载文件不存在");
+        }
+        response.reset();
+        response.setContentType("application/octet-stream");
+        response.setCharacterEncoding("utf-8");
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment;filename=" + urlName );
+
+        try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
+            byte[] buff = new byte[1024];
+            OutputStream os  = response.getOutputStream();
+            int i = 0;
+            while ((i = bis.read(buff)) != -1) {
+                os.write(buff, 0, i);
+                os.flush();
+            }
+        } catch (IOException e) {
+
+            return new ResultVO("-1","下载失败");
+        }
+        return new ResultVO();
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping("periodical")
 @RestController
@@ -36,6 +37,15 @@ public class PeriodicalController {
         User user = commontService.getUserByEmail(email);
         if (user.getUserIdentity()!=0)
             return periodicalService.examinePeriodical(periodical , user);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
+    @GetMapping("downloadPeriodical.do")
+    public ResultVO downloadPeriodical(HttpServletRequest request, HttpServletResponse response,String urlName ) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0)
+            return periodicalService.downloadPeriodical(response,urlName);
         return new ResultVO("-4","没有权限访问该功能");
     }
 }

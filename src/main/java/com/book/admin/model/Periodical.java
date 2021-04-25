@@ -78,4 +78,9 @@ public class Periodical {
      */
     private Date operateTime;
 
+    /**
+     * 期刊下载名字
+     */
+    private String urlName;
+
 }

@@ -5,10 +5,7 @@ import com.book.admin.mapping.dao.UserDaoProvider;
 import com.book.admin.model.Periodical;
 import com.book.admin.model.User;
 import com.book.admin.query.Queryparam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -35,4 +32,7 @@ public interface UserMapping {
 
     @SelectProvider(type = UserDaoProvider.class, method = "getCount")
     int getCount(Queryparam queryparam);
+
+    @Update("")
+    Long updateGroupId(int userId, int groupId);
 }
