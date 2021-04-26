@@ -1,0 +1,154 @@
+{
+  "type": "page",
+  "title": "用户列表",
+  "body":{
+    "type": "crud",
+    "mode": "table",
+    "api": {
+      "method": "post",
+      "url": "http://localhost:8080/user/queryAllToPass.do",
+      "data": {
+        "page":"${page}",
+        "pageSize":"${perPage|toInt}",
+        "filterParams":[
+          {
+            "name": "userName",
+            "relation": "like",
+            "value": "${userName}"
+          }
+        ]
+      }
+    },
+    "filter": {
+      "title": "查找",
+      "controls": [
+        {
+          "type": "text",
+          "label":"用户姓名",
+          "name":"userName"
+        },
+        {
+          "type": "submit",
+          "label": "搜索",
+          "level": "primary"
+        },
+        {
+          "type": "reset",
+          "label": "重置",
+          "level": "info"
+        }
+      ]
+    },
+    "footerToolbar": [
+      "switch-per-page",
+      {
+        "type": "tpl",
+        "tpl": "共有${total}条数据",
+        "align": "right"
+      },
+      "pagination"
+    ],
+    "columns":[
+      {
+        "type": "text",
+        "name": "userId",
+        "label": "用户id"
+      },
+      {
+        "type": "text",
+        "name": "email",
+        "label": "用户邮箱"
+      },
+      {
+        "type": "text",
+        "name": "userIdentity",
+        "label": "用户身份"
+      },
+      {
+        "type": "text",
+        "name": "groupId",
+        "label": "分组id"
+      },
+      {
+        "type": "text",
+        "name": "userName",
+        "label": "用户姓名"
+      },
+      {
+        "type": "text",
+        "name": "sex",
+        "label": "性别"
+      },
+      {
+        "type": "text",
+        "name": "jobNumber",
+        "label": "用户工号"
+      },
+      {
+        "type": "text",
+        "name": "telephoneNumber",
+        "label": "电话号码"
+      },
+      {
+        "type": "text",
+        "name": "introduce",
+        "label": "介绍"
+      },
+      {
+        "type": "operation",
+        "label": "操作",
+        "buttons":[
+          {
+            "tooltip": "修改用户权限",
+            "icon": "fa fa-id-card-o",
+            "size": "md",
+            "type": "button",
+            "actionType": "dialog",
+            "dialog":{
+              "title": "修改权限",
+              "body": {
+                "type": "form",
+                "title": "权限选项",
+                "api":{
+                  "url": "http://localhost:8080/user/modifyUserIdentity.do",
+                  "method": "get",
+                  "data": {
+                    "userId": "${userId}",
+                    "userIdentity": "${userIdentity}"
+                  }
+                },
+                "actions": [
+                  {
+                    "type": "submit",
+                    "label": "提交",
+                    "primary": true
+                  }
+                ],
+                "controls": {
+                  "type": "select",
+                  "name": "userIdentity",
+                  "required": true,
+                  "label": "选择用户修改省份",
+                  "options": [
+                    {
+                      "label": "封禁用户",
+                      "value": 0
+                    },
+                    {
+                      "label": "审核员",
+                      "value": 1
+                    },
+                    {
+                      "label": "管理员",
+                      "value": 2
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

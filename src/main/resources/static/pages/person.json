@@ -11,7 +11,7 @@
     "actions": [],
     "controls": [
       {
-        "type":"text",
+        "type":"static",
         "name":"userId",
         "placeholder": "请输入邮箱地址",
         "label":"用户id",
@@ -19,7 +19,7 @@
         "disabled": true
       },
       {
-        "type":"email",
+        "type":"static",
         "name":"email",
         "placeholder": "请输入邮箱地址",
         "label":"邮箱地址",
@@ -54,7 +54,7 @@
         ]
       },
       {
-        "type":"text",
+        "type":"static",
         "name":"userName",
         "label":"用户姓名",
         "placeholder": "请填入真实姓名",
@@ -62,7 +62,7 @@
         "disabled": true
       },
       {
-        "type":"text",
+        "type":"static",
         "name":"groupId",
         "label":"分组id",
         "size":"md",
@@ -89,7 +89,7 @@
         ]
       },
       {
-        "type":"text",
+        "type":"static",
         "name":"jobNumber",
         "label":"用户工号",
         "placeholder": "请输入用户工号",
@@ -97,7 +97,7 @@
         "disabled": true
       },
       {
-        "type":"text",
+        "type":"static",
         "name":"telephoneNumber",
         "label":"电话号码",
         "placeholder": "请输入电话号码",
@@ -105,7 +105,7 @@
         "disabled": true
       },
       {
-        "type":"text",
+        "type":"static",
         "name":"introduce",
         "label":"介绍",
         "placeholder": "请输入个人介绍",

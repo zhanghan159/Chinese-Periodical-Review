@@ -70,5 +70,14 @@ public class UserController {
         return new ResultVO("-4","没有权限访问该功能");
     }
 
+    @GetMapping("modifyUserIdentity.do")
+    public ResultVO modifyUserIdentity (HttpServletRequest request,int userId,int userIdentity) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity() == 3)
+            return userService.modifyUserIdentity(userId,userIdentity);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
 
 }

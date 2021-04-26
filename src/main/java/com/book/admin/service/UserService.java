@@ -49,4 +49,9 @@ public class UserService {
         userMapper.updateUserIdentity(userId,1);
         return new ResultVO();
     }
+
+    public ResultVO modifyUserIdentity(int userId, int userIdentity) {
+        userMapper.updateUserIdentity(userId,userIdentity);
+        return new ResultVO();
+    }
 }

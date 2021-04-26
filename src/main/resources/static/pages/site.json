@@ -27,24 +27,6 @@
                 "label": "待审核列表",
                 "url": "/examineManger/examine",
                 "schemaApi": "get:pages/examine.json"
-              },
-              {
-                "label": "页面A-2",
-                "url": "2",
-                "schema": {
-                  "type": "page",
-                  "title": "页面A-2",
-                  "body": "页面A-2"
-                }
-              },
-              {
-                "label": "页面A-3",
-                "url": "3",
-                "schema": {
-                  "type": "page",
-                  "title": "页面A-3",
-                  "body": "页面A-3"
-                }
               }
             ]
           }
