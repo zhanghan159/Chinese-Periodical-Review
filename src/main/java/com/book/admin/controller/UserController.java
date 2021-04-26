@@ -43,7 +43,7 @@ public class UserController {
         return new ResultVO("-4","没有权限访问该功能");
     }
 
-    @PostMapping("goingGroup.do")
+    @GetMapping("goingGroup.do")
     public ResultVO goingGroup (HttpServletRequest request,int userId,int groupId) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);

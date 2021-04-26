@@ -1,7 +1,6 @@
 package com.book.admin.service;
 
-import com.book.admin.mapping.UserMapping;
-import com.book.admin.model.Periodical;
+import com.book.admin.mapping.UserMapper;
 import com.book.admin.model.User;
 import com.book.admin.query.PagerHelper;
 import com.book.admin.query.Queryparam;
@@ -21,19 +20,19 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    private UserMapping userMapping;
+    private UserMapper userMapper;
 
     public ResultVO queryAllToPass(Queryparam queryparam, User user) {
         queryparam.isFilterParamIsEmpty();
-        List<User> all = userMapping.queryByPage(queryparam);
-        int count = userMapping.getCount(queryparam);
+        List<User> all = userMapper.queryByPage(queryparam);
+        int count = userMapper.getCount(queryparam);
         PagerHelper<User> userPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
         return new ResultVO(userPagerHelper);
     }
 
     @Transactional
     public ResultVO goingGroup(int userId, int groupId) {
-        Long i = userMapping.updateGroupId (userId,groupId);
+        Long i = userMapper.updateGroupId (userId,groupId);
         return new ResultVO();
     }
 }

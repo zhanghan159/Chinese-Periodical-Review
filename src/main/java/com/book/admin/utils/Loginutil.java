@@ -1,15 +1,7 @@
 package com.book.admin.utils;
 
-import com.book.admin.mapping.UserMapping;
-import com.book.admin.model.User;
-import com.book.admin.service.UserService;
-import com.book.admin.vo.ResultVO;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 
 /**
  * @ClassName Loginutil

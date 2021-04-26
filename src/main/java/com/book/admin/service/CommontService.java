@@ -1,6 +1,6 @@
 package com.book.admin.service;
 
-import com.book.admin.mapping.UserMapping;
+import com.book.admin.mapping.UserMapper;
 import com.book.admin.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class CommontService {
     @Autowired
-    private UserMapping userMapping;
+    private UserMapper userMapper;
 
     public  int getUserIdentity(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
@@ -26,14 +26,14 @@ public class CommontService {
         }
         for(Cookie cookie:cookies) {
             if(cookie.getName().equals("email")) {
-                return userMapping.getUserIdentityByEmail(cookie.getName());
+                return userMapper.getUserIdentityByEmail(cookie.getName());
             }
         }
         return 0;
     }
 
     public User getUserByEmail (String email) {
-        return userMapping.getUserByEmail(email);
+        return userMapper.getUserByEmail(email);
     }
 
 

@@ -94,13 +94,9 @@
                 "schemaApi": "get:pages/userManger.json"
               },
               {
-                "label": "页面A-2",
-                "url": "2",
-                "schema": {
-                  "type": "page",
-                  "title": "页面A-2",
-                  "body": "页面A-2"
-                }
+                "label": "分组管理",
+                "url": "/groupManger/groupManger",
+                "schemaApi": "get:pages/groupManger.json"
               },
               {
                 "label": "页面A-3",

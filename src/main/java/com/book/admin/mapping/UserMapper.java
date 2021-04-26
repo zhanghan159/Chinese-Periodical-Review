@@ -13,7 +13,7 @@ import java.util.List;
 
 @Mapper
 @Component
-public interface UserMapping {
+public interface UserMapper {
     @Select("select * from user where email = #{email} and password = #{password}")
     User getUserByEmailAndPassword(User user);
 
@@ -33,6 +33,9 @@ public interface UserMapping {
     @SelectProvider(type = UserDaoProvider.class, method = "getCount")
     int getCount(Queryparam queryparam);
 
-    @Update("")
+    @Update("update user set groupId = #{groupId} where userId = #{userId}")
     Long updateGroupId(int userId, int groupId);
+
+    @Select("select count(userId) from user where groupId = #{groupId}")
+    int getCountByGroup( int groupId);
 }

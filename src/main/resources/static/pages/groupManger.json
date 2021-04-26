@@ -1,20 +1,20 @@
 {
   "type": "page",
-  "title": "用户列表",
+  "title": "分组列表",
   "body":{
     "type": "crud",
     "mode": "table",
     "api": {
       "method": "post",
-      "url": "http://localhost:8080/user/queryAllToPass.do",
+      "url": "http://localhost:8080/userGroup/queryAllByPage.do",
       "data": {
         "page":"${page}",
         "pageSize":"${perPage|toInt}",
         "filterParams":[
           {
-            "name": "userName",
+            "name": "groupName",
             "relation": "like",
-            "value": "${userName}"
+            "value": "${groupName}"
           }
         ]
       }
@@ -24,8 +24,8 @@
       "controls": [
         {
           "type": "text",
-          "label":"用户姓名",
-          "name":"userName"
+          "label":"分组名字",
+          "name":"groupName"
         },
         {
           "type": "submit",
@@ -39,31 +39,7 @@
         }
       ]
     },
-    "footerToolbar": [
-      "switch-per-page",
-      {
-        "type": "tpl",
-        "tpl": "共有${total}条数据",
-        "align": "right"
-      },
-      "pagination"
-    ],
     "columns":[
-      {
-        "type": "text",
-        "name": "userId",
-        "label": "用户id"
-      },
-      {
-        "type": "text",
-        "name": "email",
-        "label": "用户邮箱"
-      },
-      {
-        "type": "text",
-        "name": "userIdentity",
-        "label": "用户身份"
-      },
       {
         "type": "text",
         "name": "groupId",
@@ -71,23 +47,23 @@
       },
       {
         "type": "text",
-        "name": "userName",
-        "label": "用户姓名"
+        "name": "groupName",
+        "label": "分组名字"
       },
       {
         "type": "text",
-        "name": "sex",
-        "label": "性别"
+        "name": "groupLeaderId",
+        "label": "组长id"
       },
       {
         "type": "text",
-        "name": "jobNumber",
-        "label": "用户工号"
+        "name": "groupLeaderName",
+        "label": "组长姓名"
       },
       {
         "type": "text",
-        "name": "telephoneNumber",
-        "label": "电话号码"
+        "name": "groupPeopleNumber",
+        "label": "分组人数"
       },
       {
         "type": "text",
