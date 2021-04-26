@@ -66,7 +66,7 @@ public class PeriodicalController {
     public ResultVO goingToGroup (HttpServletRequest request, @RequestBody ModifyParam modifyParam) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity() != 1 ) {
+        if (user.getUserIdentity()!=0 && user.getUserIdentity() != 1 ) {
             List<Integer> collect = modifyParam.getPeriodicals().
                     stream().map(p -> p.getPeriodicalId()).collect(Collectors.toList());
             return periodicalService.goingToGroup(collect,modifyParam.getGroupId());

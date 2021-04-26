@@ -20,12 +20,12 @@ public interface UserMapper {
     @Select("select userIdentity from user where email = #{name}")
     int getUserIdentityByEmail(String name);
 
+    @Select("select * from user where email = #{email}")
+    User getUserByEmail(String email);
+
     @Insert("insert into user (email, password, userName, sex, jobNumber, telephoneNumber, introduce,userIdentity) " +
             "value (#{email},#{password},#{userName},#{sex},#{jobNumber},#{telephoneNumber},#{introduce},0)")
     long insert(User user);
-
-    @Select("select * from user where email = #{email}")
-    User getUserByEmail(String email);
 
     @SelectProvider(type = UserDaoProvider.class, method = "queryByPage")
     List<User> queryByPage(Queryparam queryparam);

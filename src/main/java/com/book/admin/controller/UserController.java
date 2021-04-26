@@ -38,7 +38,7 @@ public class UserController {
     public ResultVO queryAllToPass (HttpServletRequest request,@RequestBody Queryparam queryparam) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return userService.queryAllToPass(queryparam , user);
         return new ResultVO("-4","没有权限访问该功能");
     }
@@ -47,7 +47,7 @@ public class UserController {
     public ResultVO goingGroup (HttpServletRequest request,int userId,int groupId) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return userService.goingGroup(userId , groupId);
         return new ResultVO("-4","没有权限访问该功能");
     }
@@ -56,7 +56,7 @@ public class UserController {
     public ResultVO queryAllNotPass (HttpServletRequest request,@RequestBody Queryparam queryparam) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return userService.queryAllNotPass(queryparam);
         return new ResultVO("-4","没有权限访问该功能");
     }
@@ -65,7 +65,7 @@ public class UserController {
     public ResultVO pass (HttpServletRequest request,int userId) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return userService.pass(userId);
         return new ResultVO("-4","没有权限访问该功能");
     }

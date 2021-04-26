@@ -40,7 +40,7 @@ public class GroupController {
     public ResultVO queryAllByPage(HttpServletRequest request,@RequestBody Queryparam queryparam) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return groupService.queryAllByPage(queryparam);
         return new ResultVO(user);
     }
@@ -49,7 +49,7 @@ public class GroupController {
     public ResultVO addUserGroup(HttpServletRequest request,@RequestBody Group group) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return groupService.addUserGroup(group);
         return new ResultVO(user);
     }
@@ -58,7 +58,7 @@ public class GroupController {
     public ResultVO deleteGroup(HttpServletRequest request,int groupId) {
         String email = Loginutil.getCookie(request);
         User user = commontService.getUserByEmail(email);
-        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+        if (user.getUserIdentity()!=0 && user.getUserIdentity()!=1)
             return groupService.deleteGroup(groupId);
         return new ResultVO(user);
     }
