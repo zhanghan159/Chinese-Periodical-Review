@@ -1,0 +1,190 @@
+{
+  "type": "page",
+  "title": "期刊列表",
+  "body": {
+    "type": "crud",
+    "mode": "table",
+    "draggable": true,
+    "perPage": 5,
+    "keepItemSelectionOnPageChange": true,
+    "maxKeepItemSelectionLength": 11,
+    "labelTpl": "${id} ${engine}",
+    "api": {
+      "method": "post",
+      "url": "http://localhost:8080/periodical/queryAllToManger.do",
+      "data":{
+        "page":"${page}",
+        "pageSize":"${perPage|toInt}",
+        "filterParams":[
+          {
+            "name": "periodicalId",
+            "relation": "=",
+            "value": "${periodicalId|toInt}"
+          },
+          {
+            "name": "periodicalStatus",
+            "relation": "=",
+            "value": "${periodicalStatus}"
+          },
+          {
+            "name": "groupId",
+            "relation": "=",
+            "value": "${groupId}"
+          }
+        ]
+      }
+    },
+    "bulkActions": [
+      {
+        "label": "批量删除",
+        "actionType": "ajax",
+        "api": "delete:https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/${ids|raw}",
+        "confirmText": "确定要批量删除?"
+      },
+      {
+        "label": "批量修改",
+        "actionType": "dialog",
+        "dialog": {
+          "title": "批量编辑",
+          "name": "sample-bulk-edit",
+          "body": {
+            "type": "form",
+            "api": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/bulkUpdate2",
+            "controls": [
+              {
+                "type": "hidden",
+                "name": "ids"
+              },
+              {
+                "type": "text",
+                "name": "engine",
+                "label": "Engine"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "headerToolbar": [
+      "filter-toggler",
+      "bulkActions",
+      {
+        "type": "columns-toggler",
+        "align": "right"
+      },
+      {
+        "type": "drag-toggler",
+        "align": "right"
+      },
+      {
+        "type": "pagination",
+        "align": "right"
+      }
+    ],
+    "filter": {
+      "title": "查找",
+      "controls": [
+        {
+          "type": "text",
+          "label":"期刊id",
+          "name":"periodicalId"
+        },
+        {
+          "type": "select",
+          "label":"审核状态",
+          "placeholder": "请选择",
+          "name":"periodicalStatus",
+          "value": 0,
+          "options": [
+            {
+              "value": 0,
+              "label": "未审核"
+            },
+            {
+              "value": 1,
+              "label": "审核通过"
+            },
+            {
+              "value": 2,
+              "label": "审核未通过"
+            },
+            {
+              "value": 3,
+              "label": "打回修改"
+            }
+          ]
+        },
+        {
+          "name": "groupId",
+          "type": "switch",
+          "label": "是否只查询未分配",
+          "trueValue": 0,
+          "falseValue": null
+        },
+        {
+          "type": "submit",
+          "label": "搜索",
+          "level": "primary"
+        },
+        {
+          "type": "reset",
+          "label": "重置",
+          "level": "info"
+        }
+      ]
+    },
+    "footerToolbar": [
+      "switch-per-page",
+      {
+        "type": "tpl",
+        "tpl": "共有${total}条数据",
+        "align": "right"
+      },
+      "pagination"
+    ],
+    "columns":[
+      {
+        "type": "text",
+        "name": "periodicalId",
+        "label": "期刊id"
+      },
+      {
+        "type": "text",
+        "name": "periodicalName",
+        "label": "期刊名字"
+      },
+      {
+        "type": "text",
+        "name": "groupId",
+        "label": "分配分组Id"
+      },
+      {
+        "type": "text",
+        "name": "periodicalType",
+        "label": "期刊类别"
+      },
+      {
+        "type": "text",
+        "name": "periodicalStatus",
+        "label": "期刊状态"
+      },
+      {
+        "type": "text",
+        "name": "score",
+        "label": "期刊评分"
+      },
+      {
+        "type": "text",
+        "name": "userName",
+        "label": "审核员姓名"
+      },
+      {
+        "type": "date",
+        "name": "operateTime",
+        "label": "审核时间",
+        "valueFormat": "x",
+        "format": "YYYY-MM-DD HH:mm:ss"
+      }
+    ]
+  }
+}

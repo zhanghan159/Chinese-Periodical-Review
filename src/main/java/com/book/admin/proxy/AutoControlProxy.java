@@ -34,7 +34,8 @@ public class AutoControlProxy {
     @Transactional
     public void discardToDye() {
         List<Group> all = groupMapper.getAll();
-        all.stream().forEach(g -> groupMapper.updateGroupPeopleNumber(userMapper.getCountByGroup(g.getGroupId())));
+        all.stream().forEach(
+                g -> { groupMapper.updateGroupPeopleNumber(userMapper.getCountByGroup(g.getGroupId()), g.getGroupId());});
         System.out.println("-------------------*******----------------" +
                 "\n自动修改组人数");
     }

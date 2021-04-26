@@ -99,13 +99,9 @@
                 "schemaApi": "get:pages/groupManger.json"
               },
               {
-                "label": "页面A-3",
-                "url": "3",
-                "schema": {
-                  "type": "page",
-                  "title": "页面A-3",
-                  "body": "页面A-3"
-                }
+                "label": "期刊管理",
+                "url": "/groupManger/periodicalManger",
+                "schemaApi": "get:pages/periodicalManger.json"
               }
             ]
           },

@@ -37,18 +37,6 @@ public class PeriodicalService {
     }
 
     public ResultVO downloadPeriodical(HttpServletResponse response,String urlName) {
-//        try {
-//            BufferedInputStream fis = new BufferedInputStream(new FileInputStream("file/"+urlName));
-//            OutputStream out = new BufferedOutputStream(response.getOutputStream());
-//            byte[] buffer = new byte[fis.available()];
-//            fis.read(buffer);
-//            out.write(buffer);
-//            out.flush();
-//        } catch (Exception e) {
-//            return new ResultVO("-10","文件不存在");
-//        }
-//        return new ResultVO();
-
         File file = new File("file/" + urlName);
         if(!file.exists()){
             return new ResultVO("-1","下载文件不存在");
@@ -72,5 +60,13 @@ public class PeriodicalService {
             return new ResultVO("-1","下载失败");
         }
         return new ResultVO();
+    }
+
+    public ResultVO queryAllToManger(Queryparam queryparam) {
+        queryparam.isFilterParamIsEmpty();
+        List<Periodical> all = periodicalMapper.queryAllToManger(queryparam);
+        int count = periodicalMapper.getToMangerCount(queryparam);
+        PagerHelper<Periodical> periodicalPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
+        return new ResultVO(periodicalPagerHelper);
     }
 }

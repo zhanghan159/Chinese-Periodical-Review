@@ -48,4 +48,13 @@ public class PeriodicalController {
             return periodicalService.downloadPeriodical(response,urlName);
         return new ResultVO("-4","没有权限访问该功能");
     }
+
+    @PostMapping("queryAllToManger.do")
+    public ResultVO queryAllToManger (HttpServletRequest request,@RequestBody Queryparam queryparam) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity() != 1 )
+            return periodicalService.queryAllToManger(queryparam);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
 }

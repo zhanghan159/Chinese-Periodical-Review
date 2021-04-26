@@ -39,6 +39,67 @@
         }
       ]
     },
+    "headerToolbar": [
+      "bulkActions",
+      {
+        "type": "columns-toggler",
+        "align": "left "
+      },
+      {"label":"新增",
+        "type":"button",
+        "level":"primary",
+        "icon":"fa fa-fa-plus",
+        "align":"left ",
+        "actionType":"dialog",
+        "dialog":{
+          "disabled":true,
+          "title":"添加分组",
+          "body":{
+            "type": "form",
+            "api":{
+              "method":"post",
+              "url":"http://localhost:8080/userGroup/addUserGroup.do",
+              "data":{
+                "&": "$$"
+              }
+            },
+            "controls":[
+              {
+                "type": "text",
+                "name": "groupName",
+                "label": "分组名字"
+              },
+              {
+                "type": "text",
+                "name": "groupLeaderId",
+                "label": "组长id"
+              },
+              {
+                "type": "text",
+                "name": "groupLeaderName",
+                "label": "组长姓名"
+              },
+              {
+                "type": "text",
+                "name": "introduce",
+                "label": "介绍"
+              }
+            ]
+          }
+        }
+
+      },
+      "pagination"
+    ],
+    "footerToolbar": [
+      "switch-per-page",
+      {
+        "type": "tpl",
+        "tpl": "共有${total}条数据",
+        "align": "right"
+      },
+      "pagination"
+    ],
     "columns":[
       {
         "type": "text",
@@ -75,42 +136,17 @@
         "label": "操作",
         "buttons":[
           {
-            "tooltip": "加入分组",
-            "icon": "fa fa-users",
+            "tooltip": "解散分组",
+            "icon": "fa fa-trash text-danger",
             "size": "md",
             "type": "button",
-            "actionType": "dialog",
-            "dialog":{
-              "title": "加入分组",
-              "body": {
-                "type": "form",
-                "title": "分组选项",
-                "api":{
-                  "url": "http://localhost:8080/user/goingGroup.do",
-                  "method": "get",
-                  "data": {
-                    "userId": "${userId}",
-                    "groupId": "${groupId}"
-                  }
-                },
-                "actions": [
-                  {
-                    "type": "submit",
-                    "label": "提交",
-                    "primary": true
-                  }
-                ],
-                "controls": {
-                  "type": "select",
-                  "name": "groupId",
-                  "label": "加入分组",
-                  "valueField": "groupId",
-                  "labelField": "groupName",
-                  "source": {
-                    "method": "get",
-                    "url": "http://localhost:8080/userGroup/getAll.do"
-                  }
-                }
+            "confirmText": "确认要删除？",
+            "actionType": "ajax",
+            "api": {
+              "url": "http://localhost:8080/userGroup/delete.do",
+              "method": "get",
+              "data": {
+                "groupId": "${groupId}"
               }
             }
           }

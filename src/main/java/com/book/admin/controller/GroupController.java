@@ -1,5 +1,6 @@
 package com.book.admin.controller;
 
+import com.book.admin.model.Group;
 import com.book.admin.model.User;
 import com.book.admin.query.Queryparam;
 import com.book.admin.service.CommontService;
@@ -41,6 +42,24 @@ public class GroupController {
         User user = commontService.getUserByEmail(email);
         if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
             return groupService.queryAllByPage(queryparam);
+        return new ResultVO(user);
+    }
+
+    @PostMapping("addUserGroup.do")
+    public ResultVO addUserGroup(HttpServletRequest request,@RequestBody Group group) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+            return groupService.addUserGroup(group);
+        return new ResultVO(user);
+    }
+
+    @GetMapping("delete.do")
+    public ResultVO deleteGroup(HttpServletRequest request,int groupId) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+            return groupService.deleteGroup(groupId);
         return new ResultVO(user);
     }
 }

@@ -38,4 +38,7 @@ public interface UserMapper {
 
     @Select("select count(userId) from user where groupId = #{groupId}")
     int getCountByGroup( int groupId);
+
+    @Update("update user set groupId = #{groupIdToUpdate} where groupId = #{groupId}")
+    long updateGroupIdByGroupId(int groupId, int groupIdToUpdate);
 }

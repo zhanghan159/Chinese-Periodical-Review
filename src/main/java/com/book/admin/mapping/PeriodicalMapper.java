@@ -32,4 +32,13 @@ public interface PeriodicalMapper {
             "operateTime = #{operateTime}" +
             "where periodicalId = #{periodicalId} ")
     long updata(Periodical periodical);
+
+    @Update("update periodical set groupId = #{groupIdToUpdate} where groupId = #{groupId}")
+    Long updateGroupIdByGroupId(int groupId, int groupIdToUpdate);
+
+    @SelectProvider(type = PeriodicalDaoProvider.class, method = "queryAllToManger")
+    List<Periodical> queryAllToManger(Queryparam queryparam);
+
+    @SelectProvider(type = PeriodicalDaoProvider.class, method = "getToMangerCount")
+    int getToMangerCount(Queryparam queryparam);
 }

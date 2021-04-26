@@ -46,4 +46,43 @@ public class PeriodicalDaoProvider {
             }
         }.toString();
     }
+
+    public String queryAllToManger(Queryparam queryparam){
+        return  new SQL(){
+            {
+                SELECT("*");
+                FROM("periodical");
+                if (!queryparam.getFilterParams().isEmpty()){
+                    for (FilterParam filterParam :queryparam.getFilterParams()){
+                        if ("name".equals(filterParam.getName())){
+                            WHERE(filterParam.getName() + " " + filterParam.getRelation() + " " + "'%"+filterParam.getValue()+"%'");
+                        }else {
+                            WHERE(filterParam.getName() + " " + filterParam.getRelation() + " " + filterParam.getValue());
+                        }
+                    }
+                }
+                OFFSET(queryparam.getBegin_number());
+                LIMIT(queryparam.getPageSize());
+
+            }
+        }.toString();
+    }
+
+    public String getToMangerCount(Queryparam queryparam){
+        return  new SQL(){
+            {
+                SELECT("count(periodicalId)");
+                FROM("periodical");
+                if (!queryparam.getFilterParams().isEmpty()){
+                    for (FilterParam filterParam :queryparam.getFilterParams()){
+                        if ("name".equals(filterParam.getName())){
+                            WHERE(filterParam.getName() + " " + filterParam.getRelation() + " " + "'%"+filterParam.getValue()+"%'");
+                        }else {
+                            WHERE(filterParam.getName() + " " + filterParam.getRelation() + " " + filterParam.getValue());
+                        }
+                    }
+                }
+            }
+        }.toString();
+    }
 }
