@@ -52,5 +52,23 @@ public class UserController {
         return new ResultVO("-4","没有权限访问该功能");
     }
 
+    @PostMapping("queryAllNotPass.do")
+    public ResultVO queryAllNotPass (HttpServletRequest request,@RequestBody Queryparam queryparam) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+            return userService.queryAllNotPass(queryparam);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
+    @GetMapping("pass.do")
+    public ResultVO pass (HttpServletRequest request,int userId) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity()!=1)
+            return userService.pass(userId);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
 
 }

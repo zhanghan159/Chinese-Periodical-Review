@@ -20,8 +20,8 @@ public interface UserMapper {
     @Select("select userIdentity from user where email = #{name}")
     int getUserIdentityByEmail(String name);
 
-    @Insert("insert into user (email, password, userName, sex, jobNumber, telephoneNumber, introduce) " +
-            "value (#{email},#{password},#{userName},#{sex},#{jobNumber},#{telephoneNumber},#{introduce})")
+    @Insert("insert into user (email, password, userName, sex, jobNumber, telephoneNumber, introduce,userIdentity) " +
+            "value (#{email},#{password},#{userName},#{sex},#{jobNumber},#{telephoneNumber},#{introduce},0)")
     long insert(User user);
 
     @Select("select * from user where email = #{email}")
@@ -41,4 +41,13 @@ public interface UserMapper {
 
     @Update("update user set groupId = #{groupIdToUpdate} where groupId = #{groupId}")
     long updateGroupIdByGroupId(int groupId, int groupIdToUpdate);
+
+    @SelectProvider(type = UserDaoProvider.class, method = "queryAllNotPass")
+    List<User> queryAllNotPass(Queryparam queryparam);
+
+    @SelectProvider(type = UserDaoProvider.class, method = "queryAllNotPassCount")
+    int queryAllNotPassCount(Queryparam queryparam);
+
+    @Update("update user set userIdentity = #{userIdentity} where userId = #{userId}")
+    void updateUserIdentity(int userId,int userIdentity);
 }

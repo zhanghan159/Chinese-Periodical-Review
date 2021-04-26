@@ -8,6 +8,7 @@ import com.book.admin.query.Queryparam;
 import com.book.admin.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -68,5 +69,12 @@ public class PeriodicalService {
         int count = periodicalMapper.getToMangerCount(queryparam);
         PagerHelper<Periodical> periodicalPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
         return new ResultVO(periodicalPagerHelper);
+    }
+
+    @Transactional
+    public ResultVO goingToGroup(List<Integer> collect, int groupId) {
+        collect.stream().forEach(
+                c-> periodicalMapper.modifyGroupIdByUserId(c,groupId));
+        return new ResultVO();
     }
 }

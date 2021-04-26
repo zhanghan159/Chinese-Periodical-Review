@@ -41,4 +41,8 @@ public interface PeriodicalMapper {
 
     @SelectProvider(type = PeriodicalDaoProvider.class, method = "getToMangerCount")
     int getToMangerCount(Queryparam queryparam);
+
+    @Update("update periodical set groupId = #{groupId} where periodicalId = #{periodicalId}")
+    void modifyGroupIdByUserId(Integer periodicalId, int groupId);
+
 }

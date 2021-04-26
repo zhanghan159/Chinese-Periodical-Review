@@ -2,6 +2,7 @@ package com.book.admin.controller;
 
 import com.book.admin.model.Periodical;
 import com.book.admin.model.User;
+import com.book.admin.query.ModifyParam;
 import com.book.admin.query.Queryparam;
 import com.book.admin.service.CommontService;
 import com.book.admin.service.PeriodicalService;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("periodical")
 @RestController
@@ -55,6 +59,18 @@ public class PeriodicalController {
         User user = commontService.getUserByEmail(email);
         if (user.getUserIdentity()!=0 || user.getUserIdentity() != 1 )
             return periodicalService.queryAllToManger(queryparam);
+        return new ResultVO("-4","没有权限访问该功能");
+    }
+
+    @PostMapping("goingToGroup.do")
+    public ResultVO goingToGroup (HttpServletRequest request, @RequestBody ModifyParam modifyParam) {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        if (user.getUserIdentity()!=0 || user.getUserIdentity() != 1 ) {
+            List<Integer> collect = modifyParam.getPeriodicals().
+                    stream().map(p -> p.getPeriodicalId()).collect(Collectors.toList());
+            return periodicalService.goingToGroup(collect,modifyParam.getGroupId());
+        }
         return new ResultVO("-4","没有权限访问该功能");
     }
 }

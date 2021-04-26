@@ -36,29 +36,32 @@
     },
     "bulkActions": [
       {
-        "label": "批量删除",
-        "actionType": "ajax",
-        "api": "delete:https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/${ids|raw}",
-        "confirmText": "确定要批量删除?"
-      },
-      {
-        "label": "批量修改",
+        "label": "批量分配任务",
         "actionType": "dialog",
         "dialog": {
-          "title": "批量编辑",
+          "title": "批量分配",
           "name": "sample-bulk-edit",
           "body": {
             "type": "form",
-            "api": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/sample/bulkUpdate2",
+            "api": {
+              "method": "post",
+              "url": "http://localhost:8080/periodical/goingToGroup.do",
+              "data": {
+                "periodicals": "${items}",
+                "groupId": "${groupId}"
+              }
+            },
             "controls": [
               {
-                "type": "hidden",
-                "name": "ids"
-              },
-              {
-                "type": "text",
-                "name": "engine",
-                "label": "Engine"
+                "type": "select",
+                "name": "groupId",
+                "label": "选择分组",
+                "valueField": "groupId",
+                "labelField": "groupName",
+                "source": {
+                  "method": "get",
+                  "url": "http://localhost:8080/userGroup/getAll.do"
+                }
               }
             ]
           }
@@ -81,6 +84,7 @@
         "align": "right"
       }
     ],
+
     "filter": {
       "title": "查找",
       "controls": [

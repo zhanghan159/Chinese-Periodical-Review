@@ -35,4 +35,18 @@ public class UserService {
         Long i = userMapper.updateGroupId (userId,groupId);
         return new ResultVO();
     }
+
+    public ResultVO queryAllNotPass(Queryparam queryparam) {
+        queryparam.isFilterParamIsEmpty();
+        List<User> all = userMapper.queryAllNotPass(queryparam);
+        int count = userMapper.queryAllNotPassCount(queryparam);
+        PagerHelper<User> userPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
+        return new ResultVO(userPagerHelper);
+    }
+
+    @Transactional
+    public ResultVO pass(int userId) {
+        userMapper.updateUserIdentity(userId,1);
+        return new ResultVO();
+    }
 }

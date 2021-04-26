@@ -1,0 +1,125 @@
+{
+  "type": "page",
+  "title": "用户列表",
+  "body":{
+    "type": "crud",
+    "mode": "table",
+    "api": {
+      "method": "post",
+      "url": "http://localhost:8080/user/queryAllNotPass.do",
+      "data": {
+        "page":"${page}",
+        "pageSize":"${perPage|toInt}",
+        "filterParams":[
+          {
+            "name": "userName",
+            "relation": "like",
+            "value": "${userName}"
+          },
+          {
+            "name": "userIdentity",
+            "relation": "=",
+            "value": 0
+          }
+        ]
+      }
+    },
+    "filter": {
+      "title": "查找",
+      "controls": [
+        {
+          "type": "text",
+          "label":"用户姓名",
+          "name":"userName"
+        },
+        {
+          "type": "submit",
+          "label": "搜索",
+          "level": "primary"
+        },
+        {
+          "type": "reset",
+          "label": "重置",
+          "level": "info"
+        }
+      ]
+    },
+    "footerToolbar": [
+      "switch-per-page",
+      {
+        "type": "tpl",
+        "tpl": "共有${total}条数据",
+        "align": "right"
+      },
+      "pagination"
+    ],
+    "columns":[
+      {
+        "type": "text",
+        "name": "userId",
+        "label": "用户id"
+      },
+      {
+        "type": "text",
+        "name": "email",
+        "label": "用户邮箱"
+      },
+      {
+        "type": "text",
+        "name": "userIdentity",
+        "label": "用户身份"
+      },
+      {
+        "type": "text",
+        "name": "groupId",
+        "label": "分组id"
+      },
+      {
+        "type": "text",
+        "name": "userName",
+        "label": "用户姓名"
+      },
+      {
+        "type": "text",
+        "name": "sex",
+        "label": "性别"
+      },
+      {
+        "type": "text",
+        "name": "jobNumber",
+        "label": "用户工号"
+      },
+      {
+        "type": "text",
+        "name": "telephoneNumber",
+        "label": "电话号码"
+      },
+      {
+        "type": "text",
+        "name": "introduce",
+        "label": "介绍"
+      },
+      {
+        "type": "operation",
+        "label": "操作",
+        "buttons":[
+          {
+            "tooltip": "同意申请",
+            "icon": "fa fa-check",
+            "size": "md",
+            "type": "button",
+            "confirmText": "确认同意吗？",
+            "actionType": "ajax",
+            "api": {
+              "url": "http://localhost:8080/user/pass.do",
+              "method": "get",
+              "data": {
+                "userId": "${userId}"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
