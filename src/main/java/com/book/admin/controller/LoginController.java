@@ -21,7 +21,7 @@ public class LoginController {
     @GetMapping("userLogin")
     public ResultVO userLogin(HttpServletResponse response,User user) {
         User user1 = loginService.userLogin(user);
-        if (user1 != null) {
+        if (user1 != null && user1.getUserIdentity() != 0) {
             Cookie cookie = new Cookie("email",user1.getEmail());
             cookie.setMaxAge(180000);
             cookie.setPath("/");
@@ -30,7 +30,7 @@ public class LoginController {
             return new ResultVO("登录成功");
         }else if (user1 == null) {
             return new ResultVO("-1","登录失败");
-        }if (user1.getUserIdentity() == 0) {
+        }else if (user1.getUserIdentity() == 0) {
             return new ResultVO("-1","请等待管理员审核注册申请");
         }else {
             return new ResultVO("-1","登录失败");
