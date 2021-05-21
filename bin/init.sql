@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS user(
     userName VARCHAR(50) COMMENT '用户姓名',
     sex int COMMENT '性别',
     jobNumber int COMMENT '用户工号',
-    telephoneNumber int COMMENT '电话号码',
+    telephoneNumber varchar(50) COMMENT '电话号码',
     introduce varchar(200) COMMENT '介绍'
     ) COMMENT '用户表';
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS userGroup(
     groupLeaderName VARCHAR(200) COMMENT '组长姓名',
     groupPeopleNumber INT COMMENT '分组人数',
     introduce VARCHAR(200) COMMENT '介绍'
-    ) COMMENT '分组表'
+    ) COMMENT '分组表';
 
 CREATE TABLE `periodical` (
   `periodicalId` int(11) NOT NULL AUTO_INCREMENT COMMENT '期刊id',
@@ -42,4 +42,4 @@ CREATE TABLE `periodical` (
   `operateTime` datetime DEFAULT NULL COMMENT '操作时间',
   `urlName` varchar(200) DEFAULT NULL COMMENT '期刊下载名字',
   PRIMARY KEY (`periodicalId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='期刊审核表'
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='期刊审核表';

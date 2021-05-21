@@ -48,7 +48,7 @@ public class User {
     /**
      * '电话号码'
      */
-    private int telephoneNumber;
+    private String telephoneNumber;
 
     /**
      * '介绍'

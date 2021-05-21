@@ -23,6 +23,7 @@ public class Periodical {
 
     /**
      * 期刊类别
+     * 0-未分类 1-学术类 2-技术类 3-教学书
      */
     private int periodicalType;
 
