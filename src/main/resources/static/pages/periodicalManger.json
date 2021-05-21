@@ -163,14 +163,26 @@
         "label": "分配分组Id"
       },
       {
-        "type": "text",
+        "type": "mapping",
         "name": "periodicalType",
-        "label": "期刊类别"
+        "label": "期刊类别",
+        "map": {
+          "0": "未分类",
+          "1": "学术类",
+          "2": "技术类",
+          "3": "教学书"
+        }
       },
       {
-        "type": "text",
+        "type": "mapping",
         "name": "periodicalStatus",
-        "label": "期刊状态"
+        "label": "期刊状态",
+        "map": {
+          "0": "未审核",
+          "1": "审核通过",
+          "2": "审核未通过",
+          "3": "打回修改"
+        }
       },
       {
         "type": "text",

@@ -21,7 +21,7 @@ public class Queryparam {
     public Queryparam() {
     }
 
-    public Queryparam(int pageSize, int page, int begin_number, List<FilterParam> filterParams) {
+    public Queryparam(int pageSize, int page, List<FilterParam> filterParams) {
         this.pageSize = pageSize;
         this.page = page;
         this.begin_number = (page-1)* pageSize;
@@ -43,6 +43,7 @@ public class Queryparam {
         }
     }
 
-
-
+    public void setBegin_number() {
+        this.begin_number = (this.page-1)* this.pageSize;
+    }
 }

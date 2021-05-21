@@ -65,6 +65,7 @@ public class PeriodicalService {
 
     public ResultVO queryAllToManger(Queryparam queryparam) {
         queryparam.isFilterParamIsEmpty();
+        queryparam.setBegin_number();
         List<Periodical> all = periodicalMapper.queryAllToManger(queryparam);
         int count = periodicalMapper.getToMangerCount(queryparam);
         PagerHelper<Periodical> periodicalPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());

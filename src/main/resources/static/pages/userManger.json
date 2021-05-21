@@ -60,9 +60,15 @@
         "label": "用户邮箱"
       },
       {
-        "type": "text",
+        "type": "mapping",
         "name": "userIdentity",
-        "label": "用户身份"
+        "label": "用户身份",
+        "map": {
+          "0": "申请用户",
+          "1": "审核员",
+          "2": "管理员",
+          "3": "系统管理员"
+        }
       },
       {
         "type": "text",
@@ -75,9 +81,13 @@
         "label": "用户姓名"
       },
       {
-        "type": "text",
+        "type": "mapping",
         "name": "sex",
-        "label": "性别"
+        "label": "性别",
+        "map": {
+          "0": "男",
+          "1": "女"
+        }
       },
       {
         "type": "text",
