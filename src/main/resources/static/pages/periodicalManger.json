@@ -29,7 +29,7 @@
           {
             "name": "groupId",
             "relation": "=",
-            "value": "${groupId}"
+            "value": "${groupId|toInt}"
           }
         ]
       }
@@ -84,7 +84,6 @@
         "align": "right"
       }
     ],
-
     "filter": {
       "title": "查找",
       "controls": [

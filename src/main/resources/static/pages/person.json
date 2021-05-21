@@ -111,6 +111,17 @@
         "placeholder": "请输入个人介绍",
         "size":"md",
         "disabled": true
+      },
+      {
+        "type":"button",
+        "label":"退出当前登陆",
+        "actionType":"ajax",
+        "level":"primary",
+        "align":"right",
+        "icon":"fa fa-fa-plus",
+        "api": "http://localhost:8080/user/outToUser.do",
+        "redirect":"http://localhost:8080/index.html",
+        "visibleOn": "id == 100000000000000000000"
       }
     ]
   }

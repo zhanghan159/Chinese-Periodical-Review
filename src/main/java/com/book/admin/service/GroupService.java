@@ -32,6 +32,7 @@ public class GroupService {
 
     public ResultVO queryAllByPage(Queryparam queryparam) {
         queryparam.isFilterParamIsEmpty();
+        queryparam.setBegin_number();
         List<Group> groups = groupMapper.queryAllByPage(queryparam);
         int count = groupMapper.getCount(queryparam);
         PagerHelper<Group> groupPagerHelper= new PagerHelper<>(groups,count, queryparam.getPageSize());

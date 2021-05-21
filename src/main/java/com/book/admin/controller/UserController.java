@@ -9,7 +9,10 @@ import com.book.admin.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @ClassName UserController
@@ -79,5 +82,20 @@ public class UserController {
         return new ResultVO("-4","没有权限访问该功能");
     }
 
-
+    @RequestMapping("outToUser.do")
+    public ResultVO outToUser (HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = Loginutil.getCookie(request);
+        User user = commontService.getUserByEmail(email);
+        Cookie[] cookies = request.getCookies();
+        if (cookies.length == 0) return new ResultVO("-5","操作错误");
+        for (Cookie cookie: cookies) {
+            if ("email".equals(cookie.getName())) {
+                cookie.setValue(null);
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                return new ResultVO("退出成功");
+            }
+        }
+        return new ResultVO("-4","操作错误");
+    }
 }

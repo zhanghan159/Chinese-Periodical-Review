@@ -24,6 +24,7 @@ public class UserService {
 
     public ResultVO queryAllToPass(Queryparam queryparam, User user) {
         queryparam.isFilterParamIsEmpty();
+        queryparam.setBegin_number();
         List<User> all = userMapper.queryByPage(queryparam);
         int count = userMapper.getCount(queryparam);
         PagerHelper<User> userPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
@@ -38,6 +39,7 @@ public class UserService {
 
     public ResultVO queryAllNotPass(Queryparam queryparam) {
         queryparam.isFilterParamIsEmpty();
+        queryparam.setBegin_number();
         List<User> all = userMapper.queryAllNotPass(queryparam);
         int count = userMapper.queryAllNotPassCount(queryparam);
         PagerHelper<User> userPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());

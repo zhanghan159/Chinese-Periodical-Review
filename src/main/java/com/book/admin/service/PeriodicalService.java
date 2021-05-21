@@ -22,6 +22,7 @@ public class PeriodicalService {
 
     public ResultVO queryByPage(Queryparam queryparam, User user) {
         queryparam.isFilterParamIsEmpty();
+        queryparam.setBegin_number();
         List<Periodical> all = periodicalMapper.queryByPage(queryparam,user);
         int count = periodicalMapper.getCount(queryparam,user);
         PagerHelper<Periodical> periodicalPagerHelper= new PagerHelper<>(all,count, queryparam.getPageSize());
